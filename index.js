@@ -7,6 +7,13 @@ function createContainer () {
   return containerBox
 }
 
+function createCommentsContainer () {
+  let commentsContainer = document.createElement('div')
+  commentsContainer.id = 'commentsContainer'
+  $('comments').appendChild(commentsContainer)
+  return commentsContainer
+}
+
 function removePlaceHolder (event) {
   event.target.placeholder = ''
 }
@@ -32,25 +39,56 @@ function createNameHolder () {
   return authorName
 }
 
-function createSubmitBtn () {
+function addAuthor (event) {
+  let commentAuthor = document.createElement('div')
+  if (event.target.parentElement.children[0].value !== '') {
+    commentAuthor.innerText = event.target.parentElement.children[0].value
+  } else {
+    commentAuthor.innerText = 'Anonymous'
+  }
+  return commentAuthor
+}
+
+function createComment (commentText, event) {
+  let commentBox = document.createElement('div')
+  commentBox.appendChild(addAuthor(event))
+  let comment = document.createElement('div')
+  comment.innerText = commentText
+  commentBox.appendChild(comment)
+  return commentBox
+}
+
+function addComment (event, commentsContainer) {
+  let commentText = event.target.parentElement.parentElement.children[0].value
+  if (commentText !== '') {
+    commentsContainer.appendChild(createComment(commentText, event))
+  }
+}
+
+function createSubmitBtn (commentsContainer) {
   let submitBtn = document.createElement('button')
   submitBtn.innerText = 'Submit'
-  submitBtn.addEventListener('click', () => { console.log('Hello World') })
+  submitBtn.className = 'postComment'
+  submitBtn.addEventListener('click', (event) => addComment(event, commentsContainer))
   return submitBtn
 }
 
-function createIpWrapper () {
+function createIpWrapper (commentsContainer) {
   let authorDetails = document.createElement('div')
   authorDetails.appendChild(createNameHolder())
-  authorDetails.appendChild(createSubmitBtn())
+  authorDetails.appendChild(createSubmitBtn(commentsContainer))
   return authorDetails
 }
 
-function createCommentForm (container) {
-  let commentForm = document.createElement('div')
-  commentForm.appendChild(createInputBox())
-  commentForm.appendChild(createIpWrapper())
-  container.appendChild(commentForm)
+function createCommentForm (container, commentsContainer) {
+  container.appendChild(createInputBox())
+  container.appendChild(createIpWrapper(commentsContainer))
 }
 
-createCommentForm(createContainer())
+function start () {
+  let container = createContainer()
+  let commentsContainer = createCommentsContainer()
+  createCommentForm(container, commentsContainer)
+}
+
+start()
