@@ -1,0 +1,29 @@
+{
+  "name": "chatter",
+  "version": "1.0.0",
+  "description": "Real time embeddable commenting server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DonnaAnnIssac/chatter.git"
+  },
+  "keywords": [
+    "Comment",
+    "real",
+    "time",
+    "embeddable",
+    "server"
+  ],
+  "author": "Donna Ann Issac",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DonnaAnnIssac/chatter/issues"
+  },
+  "homepage": "https://github.com/DonnaAnnIssac/chatter#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
